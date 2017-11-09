@@ -151,3 +151,13 @@ For more information, please read [CONTRIBUTING](CONTRIBUTING.md).
 ### Miscellaneous
 
 Zstd entropy stage is provided by [Huff0 and FSE, from Finite State Entropy library](https://github.com/Cyan4973/FiniteStateEntropy).
+
+---
+
+To profile Clang vs. GCC:
+
+1. Make sure that `clang`, `gcc`, and `llvm-objdump` are in your PATH, then run
+   `bash build.sh`. This will produce several build artifacts, including the
+   executables `zstd-clang` and `zstd-gcc`.
+2. To profile either of these two executables for bottlenecks, run
+   `sudo toplev --long-desc --user --core C0 taskset -c 0 --no-multiplex --single-thread -l3 env ZSTD=programs/zstd-gcc bash profile.sh`.
